@@ -119,6 +119,33 @@ describe "Items API" do
 
     expect(response).to be_successful
   end
+
+  it 'can update an item' do
+    merchant = create(:merchant)
+    id = create(:item, merchant: merchant).id
+
+    item_params = {name: "Some coffee" 
+                  }
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate(item: item_params)
+    item = JSON.parse(response.body, symbolize_names: true)  
+    
+    expect(response).to be_successful
+    expect(item).to be_a Hash
+    expect(item).to have_key(:data)
+    expect(item[:data]).to have_key(:id)
+    expect(item[:data]).to have_key(:type)
+    expect(item[:data]).to have_key(:attributes)
+    expect(item[:data][:attributes]).to have_key(:name)
+    expect(item[:data][:attributes]).to have_key(:unit_price)
+    expect(item[:data][:attributes][:unit_price]).to be_a Float
+    expect(item[:data][:attributes]).to have_key(:description)
+    expect(item[:data][:attributes]).to have_key(:merchant_id)
+    expect(item[:data][:attributes][:merchant_id]).to be_a Integer
+    expect(item[:data][:attributes][:name]).to eq("Some coffee")
+  end
 end
 
    
