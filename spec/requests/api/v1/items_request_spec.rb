@@ -22,9 +22,15 @@ describe "Items API" do
     expect(items[:data].first).to have_key(:attributes)
     expect(items[:data].first[:attributes]).to have_key(:name)
     expect(items[:data].first[:attributes]).to have_key(:unit_price)
+    expect(items[:data].first[:attributes][:unit_price]).to be_a Float
     expect(items[:data].first[:attributes]).to have_key(:description)
     expect(items[:data].first[:attributes]).to have_key(:merchant_id)
+    expect(items[:data].first[:attributes][:merchant_id]).to be_a Integer
   end
+
+  # it "gets one item" do
+  #   merchants = create_
+  # end
 end
 
    
