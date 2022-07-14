@@ -43,10 +43,26 @@ describe "Items API" do
     expect(item[:data]).to have_key(:attributes)
     expect(item[:data][:attributes]).to have_key(:name)
     expect(item[:data][:attributes]).to have_key(:unit_price)
-     expect(item[:data][:attributes][:unit_price]).to be_a Float
+    expect(item[:data][:attributes][:unit_price]).to be_a Float
     expect(item[:data][:attributes]).to have_key(:description)
     expect(item[:data][:attributes]).to have_key(:merchant_id)
     expect(item[:data][:attributes][:merchant_id]).to be_a Integer
+  end
+
+  it "sad path: gets one item" do
+    fake_id = 44
+    get "/api/v1/items/#{fake_id}"
+
+    expect(response).to_not be_successful  
+    expect(status).to eq 404
+  end
+
+  it "edge case: gets one item" do
+    fake_id = "id"
+    get "/api/v1/items/#{fake_id}"
+
+    expect(response).to_not be_successful
+    expect(status).to eq 404
   end
 end
 
