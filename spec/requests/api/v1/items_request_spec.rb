@@ -34,7 +34,8 @@ describe "Items API" do
 
     get "/api/v1/items/#{id}"
     item = JSON.parse(response.body, symbolize_names: true)
-
+    item_find = Item.find(id
+    )
     expect(response).to be_successful
     expect(item).to be_a Hash
     expect(item).to have_key(:data)
@@ -47,6 +48,7 @@ describe "Items API" do
     expect(item[:data][:attributes]).to have_key(:description)
     expect(item[:data][:attributes]).to have_key(:merchant_id)
     expect(item[:data][:attributes][:merchant_id]).to be_a Integer
+    expect(item[:data][:attributes][:name]).to eq(item_find.name)
   end
 
   it "sad path: gets one item" do
@@ -63,6 +65,34 @@ describe "Items API" do
 
     expect(response).to_not be_successful
     expect(status).to eq 404
+  end
+
+  it 'creates an item' do
+    merchant = create(:merchant)
+    item_params = {name: "Some coffee", 
+                   description: "Pretty damn good",
+                   unit_price: 345.84, 
+                   merchant_id: merchant.id
+                  }
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+    item = JSON.parse(response.body, symbolize_names: true)  
+   
+    expect(response).to be_successful
+    expect(item).to be_a Hash
+    expect(item).to have_key(:data)
+    expect(item[:data]).to have_key(:id)
+    expect(item[:data]).to have_key(:type)
+    expect(item[:data]).to have_key(:attributes)
+    expect(item[:data][:attributes]).to have_key(:name)
+    expect(item[:data][:attributes]).to have_key(:unit_price)
+    expect(item[:data][:attributes][:unit_price]).to be_a Float
+    expect(item[:data][:attributes]).to have_key(:description)
+    expect(item[:data][:attributes]).to have_key(:merchant_id)
+    expect(item[:data][:attributes][:merchant_id]).to be_a Integer
+    expect(item[:data][:attributes][:name]).to eq(Item.last.name)
   end
 end
 
