@@ -94,6 +94,31 @@ describe "Items API" do
     expect(item[:data][:attributes][:merchant_id]).to be_a Integer
     expect(item[:data][:attributes][:name]).to eq(Item.last.name)
   end
+
+  it 'sad path: creates an item' do
+    merchant = create(:merchant)
+    item_params = {name: "Some coffee", 
+                   description: "Pretty damn good", 
+                   merchant_id: merchant.id
+                  }
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    post "/api/v1/items", headers: headers, params: JSON.generate(item: item_params)
+    # item = JSON.parse(response.body, symbolize_names: true)  
+
+    expect(response).to_not be_successful
+    expect(status).to eq 404
+  end
+
+  it 'can delete item' do
+    merchant = create(:merchant)
+    id = create(:item, merchant: merchant).id
+
+    delete "/api/v1/items/#{id}"
+
+    expect(response).to be_successful
+  end
 end
 
    

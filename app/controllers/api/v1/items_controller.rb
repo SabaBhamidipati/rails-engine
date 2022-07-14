@@ -9,13 +9,21 @@ class Api::V1::ItemsController < ApplicationController
     end
 
     def create
-        item = Item.create(item_params)
-        item.save
-        render json: ItemSerializer.new(item), status: 201
+        item = Item.new(item_params)
+        if item.save
+            render json: ItemSerializer.new(item), status: 201
+        else 
+            record_not_found 
+        end
+    end
+
+    def destroy
+        item = Item.find(params[:id])
+        item.destroy
+        render json: "", status: 204
     end
 
     private
-
     def item_params
         params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
     end
