@@ -5,6 +5,19 @@
         "lines": [
           1,
           1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
@@ -15,14 +28,28 @@
           null
         ]
       },
-      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/controllers/api/v1/items_merchant_controller.rb": {
+      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
         "lines": [
           1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
           null,
           1,
           1,
-          0,
-          0,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null
         ]
@@ -35,16 +62,15 @@
           1,
           null,
           1,
-          1,
+          0,
           null,
           null
         ]
       },
-      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/models/item.rb": {
+      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
         "lines": [
           1,
           1,
-          null,
           1,
           null
         ]
@@ -59,20 +85,21 @@
         "branches": {
         }
       },
-      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/models/customer.rb": {
+      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/models/item.rb": {
         "lines": [
           0,
+          0,
           null,
+          0,
           0
         ],
         "branches": {
         }
       },
-      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/serializers/merchant_serializer.rb": {
+      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/models/customer.rb": {
         "lines": [
           0,
-          0,
-          0,
+          null,
           0
         ],
         "branches": {
@@ -100,26 +127,6 @@
       },
       "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/jobs/application_job.rb": {
         "lines": [
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
-        "lines": [
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
           0,
           0
         ],
@@ -185,6 +192,20 @@
         "branches": {
         }
       },
+      "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/controllers/api/v1/items_merchant_controller.rb": {
+        "lines": [
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/Users/sababhamidipati/turing_work/3mod/projects/rails-engine/app/channels/application_cable/connection.rb": {
         "lines": [
           0,
@@ -206,6 +227,6 @@
         }
       }
     },
-    "timestamp": 1657882954
+    "timestamp": 1657892477
   }
 }

@@ -4,11 +4,19 @@ class Api::V1::MerchantsController < ApplicationController
     end
 
     def show  
-        # if Merchant.exists?(params[:id])
             merchant = Merchant.find(params[:id])
             render json: MerchantSerializer.new(merchant)
+    end
+
+    def find
+        merchant = Merchant.find_first_partial(params[:name])
+
+        render json: MerchantSerializer.new(merchant)
+        # merchant_find = Merchant.find(params[:name]).downcase
+        # if merchant_find.exists?
+        #     render json: MerchantSerializer.new(merchant_find).first
         # else
-        #     render json: {error: "not-found", status: 404}
-        # end
+        #     record_not_found
+        
     end
 end
