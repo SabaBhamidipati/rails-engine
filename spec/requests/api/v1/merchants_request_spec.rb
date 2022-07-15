@@ -5,7 +5,7 @@ describe "Merchants API" do
         create_list(:merchant, 3)
 
         get '/api/v1/merchants'
-       
+        
         expect(response).to be_successful
 
         merchants = JSON.parse(response.body, symbolize_names: true)
@@ -76,5 +76,26 @@ describe "Merchants API" do
 
         expect(response).to_not be_successful
         expect(status).to eq(404)
+    end
+
+    it 'can find one merchant by name fragment' do
+        merchant_1 = create(:merchant, name: "Cool Hand Luke")
+        merchant_2 = create(:merchant, name: "Coral Gables")
+        merchant_find = Merchant.find(merchant_1.id)
+
+        get "/api/v1/merchants/find", params: {name: "co"}
+        merchant_1 = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to be_successful
+        expect(merchant_1).to be_a Hash
+        expect(merchant_1).to have_key(:data)
+        expect(merchant_1[:data]).to be_a Hash        
+        expect(merchant_1[:data]).to have_key(:id)
+        expect(merchant_1[:data][:id]).to be_a String
+        expect(merchant_1[:data]).to have_key(:type)
+        expect(merchant_1[:data]).to have_key(:attributes)
+        expect(merchant_1[:data][:attributes]).to have_key(:name)
+        expect(merchant_1[:data][:attributes][:name]).to be_a String
+        expect(merchant_1[:data][:attributes][:name]).to eq(merchant_find.name)
     end
 end
