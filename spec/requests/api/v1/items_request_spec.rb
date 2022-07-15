@@ -147,6 +147,20 @@ describe "Items API" do
     expect(item[:data][:attributes][:name]).to eq("Some coffee")
   end
 
+  it 'sad path: can update item' do
+    merchant = create(:merchant)
+    bad_id = 20000
+
+    item_params = {name: "Some coffee"
+                  }
+
+    headers = {"CONTENT_TYPE" => "application/json"}
+
+    patch "/api/v1/items/#{bad_id}", headers: headers, params: JSON.generate(item: item_params)
+
+    expect(response).to_not be_successful
+  end
+
   it 'can get an item merchant' do
     merchant = create(:merchant)
     id = create(:item, merchant: merchant).id
