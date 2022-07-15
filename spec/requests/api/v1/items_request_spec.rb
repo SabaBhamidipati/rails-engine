@@ -211,6 +211,10 @@ describe "Items API" do
 
     expect(response).to_not be_successful
   end
+
+  it 'returns list of items by name for search' do
+    merchant1 
+  end
 end
 
    
