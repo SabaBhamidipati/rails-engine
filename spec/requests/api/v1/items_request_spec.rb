@@ -161,7 +161,7 @@ describe "Items API" do
     expect(response).to_not be_successful
   end
  
-  it 'sad path: can update item string id' do
+  it 'edge case: can update item string id' do
     merchant = create(:merchant)
     bad_id = "please_fail"
 
