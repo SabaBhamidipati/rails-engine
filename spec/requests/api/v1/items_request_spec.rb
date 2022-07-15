@@ -160,28 +160,28 @@ describe "Items API" do
 
     expect(response).to_not be_successful
   end
- 
+  
   it 'edge case: can update item string id' do
     merchant = create(:merchant)
     bad_id = "please_fail"
-
+    
     item_params = {name: "Some coffee"
-                  }
-
+    }
+    
     headers = {"CONTENT_TYPE" => "application/json"}
-
+    
     patch "/api/v1/items/#{bad_id}", headers: headers, params: JSON.generate(item: item_params)
-
+    
     expect(response).to_not be_successful
   end
-
+  
   it 'can get an item merchant' do
     merchant = create(:merchant)
     id = create(:item, merchant: merchant).id
-
+    
     get "/api/v1/items/#{id}/merchant"
     merchant = JSON.parse(response.body, symbolize_names: true)
-        
+    
     expect(response).to be_successful
     expect(merchant).to be_a Hash
     expect(merchant).to have_key(:data)
@@ -192,6 +192,24 @@ describe "Items API" do
     expect(merchant[:data]).to have_key(:attributes)
     expect(merchant[:data][:attributes]).to have_key(:name)
     expect(merchant[:data][:attributes][:name]).to be_a String
+  end
+ 
+  it 'sad path: get item merchant bad integer' do
+    merchant = create(:merchant)
+    bad_id = 20000
+
+    get "/api/v1/items/#{bad_id}/merchant"
+
+    expect(response).to_not be_successful
+  end
+ 
+  it 'edge case: get item merchant string id' do
+    merchant = create(:merchant)
+    bad_id = "please_fail"
+
+    get "/api/v1/items/#{bad_id}/merchant"
+
+    expect(response).to_not be_successful
   end
 end
 
